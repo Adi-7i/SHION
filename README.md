@@ -1,267 +1,73 @@
-# Shion AI 🔍
+# Shion AI — Deep Research Engine
 
-[![GitHub Repo stars](https://img.shields.io/github/stars/ItzCrazyKns/Perplexica?style=social)](https://github.com/ItzCrazyKns/Perplexica/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/ItzCrazyKns/Perplexica?style=social)](https://github.com/ItzCrazyKns/Perplexica/network/members)
-[![GitHub watchers](https://img.shields.io/github/watchers/ItzCrazyKns/Perplexica?style=social)](https://github.com/ItzCrazyKns/Perplexica/watchers)
-[![Docker Pulls](https://img.shields.io/docker/pulls/itzcrazykns1337/perplexica?color=blue)](https://hub.docker.com/r/itzcrazykns1337/perplexica)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/ItzCrazyKns/Perplexica/blob/master/LICENSE)
-[![GitHub last commit](https://img.shields.io/github/last-commit/ItzCrazyKns/Perplexica?color=green)](https://github.com/ItzCrazyKns/Perplexica/commits/master)
-[![Discord](https://dcbadge.limes.pink/api/server/26aArMy8tT?style=flat)](https://discord.gg/26aArMy8tT)
+## Introduction
+Shion AI is an advanced AI-powered research assistant and search engine developed by Cynerza. It is designed to deliver accurate, source-aware answers, summarize relevant web information, and support deep research workflows.
 
-Shion AI is a **privacy-focused AI answering engine** that runs entirely on your own hardware. It combines knowledge from the vast internet with support for **local LLMs** (Ollama) and cloud providers (OpenAI, Claude, Groq), delivering accurate answers with **cited sources** while keeping your searches completely private.
+Inspired by systems like Perplexity, Shion AI is built to provide a more powerful and customizable AI research platform for developers, teams, and independent researchers.
 
-![preview](.assets/perplexica-screenshot.png)
+## Key Features
+- AI-powered research engine for complex, multi-step queries
+- Multi-model AI support across local and cloud model providers
+- Web search summarization with source-grounded responses
+- Streaming AI responses for faster interaction
+- Research modes: `Speed`, `Balanced`, and `Quality`
+- Advanced model selection for task-specific performance
+- Modern chat-based research interface for iterative exploration
 
-Want to know more about its architecture and how it works? You can read it [here](https://github.com/ItzCrazyKns/Perplexica/tree/master/docs/architecture/README.md).
+## Architecture Overview
+Shion AI is structured as a modern web application with modular AI integrations:
+- **Next.js frontend** for the interactive chat and research UI
+- **Node.js backend runtime** powering API routes and orchestration logic
+- **AI provider integrations** for flexible model access
+- **Search engine aggregation** to collect and synthesize web results
 
-## ✨ Features
+## Getting Started
+### Prerequisites
+- Node.js and npm installed
+- A configured search provider and AI model provider (depending on your setup)
 
-🤖 **Support for all major AI providers** - Use local LLMs through Ollama or connect to OpenAI, Anthropic Claude, Google Gemini, Groq, and more. Mix and match models based on your needs.
-
-⚡ **Smart search modes** - Choose Speed Mode when you need quick answers, Balanced Mode for everyday searches, or Quality Mode for deep research.
-
-🧭 **Pick your sources** - Search the web, discussions, or academic papers. More sources and integrations are in progress.
-
-🧩 **Widgets** - Helpful UI cards that show up when relevant, like weather, calculations, stock prices, and other quick lookups.
-
-🔍 **Web search powered by SearxNG** - Access multiple search engines while keeping your identity private. Support for Tavily and Exa coming soon for even better results.
-
-📷 **Image and video search** - Find visual content alongside text results. Search isn't limited to just articles anymore.
-
-📄 **File uploads** - Upload documents and ask questions about them. PDFs, text files, images - Shion AI understands them all.
-
-🌐 **Search specific domains** - Limit your search to specific websites when you know where to look. Perfect for technical documentation or research papers.
-
-💡 **Smart suggestions** - Get intelligent search suggestions as you type, helping you formulate better queries.
-
-📚 **Discover** - Browse interesting articles and trending content throughout the day. Stay informed without even searching.
-
-🕒 **Search history** - Every search is saved locally so you can revisit your discoveries anytime. Your research is never lost.
-
-✨ **More coming soon** - We're actively developing new features based on community feedback. Join our Discord to help shape Shion AI's future!
-
-## Sponsors
-
-Shion AI's development is powered by the generous support of our sponsors. Their contributions help keep this project free, open-source, and accessible to everyone.
-
-<div align="center">
-  
-  
-<a href="https://www.warp.dev/perplexica">
-  <img alt="Warp Terminal" src=".assets/sponsers/warp.png" width="100%">
-</a>
-
-### **✨ [Try Warp - The AI-Powered Terminal →](https://www.warp.dev/perplexica)**
-
-Warp is revolutionizing development workflows with AI-powered features, modern UX, and blazing-fast performance. Used by developers at top companies worldwide.
-
-</div>
-
----
-
-We'd also like to thank the following partners for their generous support:
-
-<table>
-  <tr>
-    <td width="100" align="center">
-      <a href="https://dashboard.exa.ai" target="_blank">
-        <img src=".assets/sponsers/exa.png" alt="Exa" width="80" height="80" style="border-radius: .75rem;" />
-      </a>
-    </td>
-    <td>
-      <a href="https://dashboard.exa.ai">Exa</a> • The Perfect Web Search API for LLMs - web search, crawling, deep research, and answer APIs
-    </td>
-  </tr>
-</table>
-
-## Installation
-
-There are mainly 2 ways of installing Shion AI - With Docker, Without Docker. Using Docker is highly recommended.
-
-### Getting Started with Docker (Recommended)
-
-Shion AI can be easily run using Docker. Simply run the following command:
-
+### Installation
 ```bash
-docker run -d -p 3000:3000 -v perplexica-data:/home/perplexica/data --name perplexica itzcrazykns1337/perplexica:latest
+npm install
 ```
 
-This will pull and start the Shion AI container with the bundled SearxNG search engine. Once running, open your browser and navigate to http://localhost:3000. You can then configure your settings (API keys, models, etc.) directly in the setup screen.
-
-**Note**: The image includes both Shion AI and SearxNG, so no additional setup is required. The `-v` flags create persistent volumes for your data and uploaded files.
-
-#### Using Shion AI with Your Own SearxNG Instance
-
-If you already have SearxNG running, you can use the slim version of Shion AI:
-
+### Running the development server
 ```bash
-docker run -d -p 3000:3000 -e SEARXNG_API_URL=http://your-searxng-url:8080 -v perplexica-data:/home/perplexica/data --name perplexica itzcrazykns1337/perplexica:slim-latest
+npm run dev
 ```
 
-**Important**: Make sure your SearxNG instance has:
-
-- JSON format enabled in the settings
-- Wolfram Alpha search engine enabled
-
-Replace `http://your-searxng-url:8080` with your actual SearxNG URL. Then configure your AI provider settings in the setup screen at http://localhost:3000.
-
-#### Advanced Setup (Building from Source)
-
-If you prefer to build from source or need more control:
-
-1. Ensure Docker is installed and running on your system.
-2. Clone the Shion AI repository:
-
-   ```bash
-   git clone https://github.com/ItzCrazyKns/Perplexica.git
-   ```
-
-3. After cloning, navigate to the directory containing the project files.
-
-4. Build and run using Docker:
-
-   ```bash
-   docker build -t perplexica .
-   docker run -d -p 3000:3000 -v perplexica-data:/home/perplexica/data --name perplexica perplexica
-   ```
-
-5. Access Shion AI at http://localhost:3000 and configure your settings in the setup screen.
-
-**Note**: After the containers are built, you can start Shion AI directly from Docker without having to open a terminal.
-
-### Non-Docker Installation
-
-1. Install SearXNG and allow `JSON` format in the SearXNG settings. Make sure Wolfram Alpha search engine is also enabled.
-2. Clone the repository:
-
-   ```bash
-   git clone https://github.com/ItzCrazyKns/Perplexica.git
-   cd Perplexica
-   ```
-
-3. Install dependencies:
-
-   ```bash
-   npm i
-   ```
-
-4. Build the application:
-
-   ```bash
-   npm run build
-   ```
-
-5. Start the application:
-
-   ```bash
-   npm run start
-   ```
-
-6. Open your browser and navigate to http://localhost:3000 to complete the setup and configure your settings (API keys, models, SearxNG URL, etc.) in the setup screen.
-
-**Note**: Using Docker is recommended as it simplifies the setup process, especially for managing environment variables and dependencies.
-
-See the [installation documentation](https://github.com/ItzCrazyKns/Perplexica/tree/master/docs/installation) for more information like updating, etc.
-
-### Troubleshooting
-
-#### Local OpenAI-API-Compliant Servers
-
-If Shion AI tells you that you haven't configured any chat model providers, ensure that:
-
-1. Your server is running on `0.0.0.0` (not `127.0.0.1`) and on the same port you put in the API URL.
-2. You have specified the correct model name loaded by your local LLM server.
-3. You have specified the correct API key, or if one is not defined, you have put _something_ in the API key field and not left it empty.
-
-#### Ollama Connection Errors
-
-If you're encountering an Ollama connection error, it is likely due to the backend being unable to connect to Ollama's API. To fix this issue you can:
-
-1. **Check your Ollama API URL:** Ensure that the API URL is correctly set in the settings menu.
-2. **Update API URL Based on OS:**
-
-   - **Windows:** Use `http://host.docker.internal:11434`
-   - **Mac:** Use `http://host.docker.internal:11434`
-   - **Linux:** Use `http://<private_ip_of_host>:11434`
-
-   Adjust the port number if you're using a different one.
-
-3. **Linux Users - Expose Ollama to Network:**
-
-   - Inside `/etc/systemd/system/ollama.service`, you need to add `Environment="OLLAMA_HOST=0.0.0.0:11434"`. (Change the port number if you are using a different one.) Then reload the systemd manager configuration with `systemctl daemon-reload`, and restart Ollama by `systemctl restart ollama`. For more information see [Ollama docs](https://github.com/ollama/ollama/blob/main/docs/faq.md#setting-environment-variables-on-linux)
-
-   - Ensure that the port (default is 11434) is not blocked by your firewall.
-
-#### Lemonade Connection Errors
-
-If you're encountering a Lemonade connection error, it is likely due to the backend being unable to connect to Lemonade's API. To fix this issue you can:
-
-1. **Check your Lemonade API URL:** Ensure that the API URL is correctly set in the settings menu.
-2. **Update API URL Based on OS:**
-
-   - **Windows:** Use `http://host.docker.internal:8000`
-   - **Mac:** Use `http://host.docker.internal:8000`
-   - **Linux:** Use `http://<private_ip_of_host>:8000`
-
-   Adjust the port number if you're using a different one.
-
-3. **Ensure Lemonade Server is Running:**
-
-   - Make sure your Lemonade server is running and accessible on the configured port (default is 8000).
-   - Verify that Lemonade is configured to accept connections from all interfaces (`0.0.0.0`), not just localhost (`127.0.0.1`).
-   - Ensure that the port (default is 8000) is not blocked by your firewall.
-
-## Using as a Search Engine
-
-If you wish to use Shion AI as an alternative to traditional search engines like Google or Bing, or if you want to add a shortcut for quick access from your browser's search bar, follow these steps:
-
-1. Open your browser's settings.
-2. Navigate to the 'Search Engines' section.
-3. Add a new site search with the following URL: `http://localhost:3000/?q=%s`. Replace `localhost` with your IP address or domain name, and `3000` with the port number if Shion AI is not hosted locally.
-4. Click the add button. Now, you can use Shion AI directly from your browser's search bar.
-
-## Using Shion AI's API
-
-Shion AI also provides an API for developers looking to integrate its powerful search engine into their own applications. You can run searches, use multiple models and get answers to your queries.
-
-For more details, check out the full documentation [here](https://github.com/ItzCrazyKns/Perplexica/tree/master/docs/API/SEARCH.md).
-
-## Expose Shion AI to network
-
-Shion AI runs on Next.js and handles all API requests. It works right away on the same network and stays accessible even with port forwarding.
-
-## One-Click Deployment
-
-[![Deploy to Sealos](https://raw.githubusercontent.com/labring-actions/templates/main/Deploy-on-Sealos.svg)](https://usw.sealos.io/?openapp=system-template%3FtemplateName%3Dperplexica)
-[![Deploy to RepoCloud](https://d16t0pc4846x52.cloudfront.net/deploylobe.svg)](https://repocloud.io/details/?app_id=267)
-[![Run on ClawCloud](https://raw.githubusercontent.com/ClawCloud/Run-Template/refs/heads/main/Run-on-ClawCloud.svg)](https://template.run.claw.cloud/?referralCode=U11MRQ8U9RM4&openapp=system-fastdeploy%3FtemplateName%3Dperplexica)
-[![Deploy on Hostinger](https://assets.hostinger.com/vps/deploy.svg)](https://www.hostinger.com/vps/docker-hosting?compose_url=https://raw.githubusercontent.com/ItzCrazyKns/Perplexica/refs/heads/master/docker-compose.yaml)
-
-## Upcoming Features
-
-- [ ] Adding more widgets, integrations, search sources
-- [ ] Adding ability to create custom agents (name T.B.D.)
-- [ ] Adding authentication
-
-## Support Us
-
-If you find Shion AI useful, consider giving us a star on GitHub. This helps more people discover Shion AI and supports the development of new features. Your support is greatly appreciated.
-
-### Donations
-
-We also accept donations to help sustain our project. If you would like to contribute, you can use the following options to donate. Thank you for your support!
-
-| Ethereum                                              |
-| ----------------------------------------------------- |
-| Address: `0xB025a84b2F269570Eb8D4b05DEdaA41D8525B6DD` |
-
-## Contribution
-
-Shion AI is built on the idea that AI and large language models should be easy for everyone to use. If you find bugs or have ideas, please share them in via GitHub Issues. For more information on contributing to Shion AI you can read the [CONTRIBUTING.md](CONTRIBUTING.md) file to learn more about Shion AI and how you can contribute to it.
-
-## Help and Support
-
-If you have any questions or feedback, please feel free to reach out to us. You can create an issue on GitHub or join our Discord server. There, you can connect with other users, share your experiences and reviews, and receive more personalized help. [Click here](https://discord.gg/EFwsmQDgAu) to join the Discord server. To discuss matters outside of regular support, feel free to contact me on Discord at `itzcrazykns`.
-
-Thank you for exploring Shion AI, the AI-powered search engine designed to enhance your search experience. We are constantly working to improve Shion AI and expand its capabilities. We value your feedback and contributions which help us make Shion AI even better. Don't forget to check back for updates and new features!
-# SHION
+After starting the server, open `http://localhost:3000` in your browser.
+
+## Configuration
+Shion AI uses environment variables for runtime configuration.
+
+Typical configuration includes:
+- AI provider credentials (API keys, model endpoints)
+- Search provider settings
+- Optional app-level runtime settings
+
+Create and manage your environment variables locally (for example via a `.env` file) and never commit real secrets to version control.
+
+## Project Structure
+Major folders in this repository:
+- `src/` - Application source code (frontend, backend routes, core logic)
+- `public/` - Static assets served by the app
+- `docs/` - Project and technical documentation
+- `drizzle/` - Database schema and migration-related files
+- `data/` - Local runtime data used by the application
+
+## Future Roadmap
+Planned upgrades include:
+- AI agents for autonomous multi-step research
+- Document intelligence for richer file understanding and extraction
+- Knowledge base features for persistent research memory
+- Team collaboration workflows
+- Advanced research tools for expert and enterprise use cases
+
+## Contributing
+Contributions are welcome from the community.
+
+If you want to improve Shion AI, please open an issue, discuss your proposal, and submit a pull request. For contribution guidelines, see [`CONTRIBUTING.md`](CONTRIBUTING.md).
+
+## License
+This project is licensed under the MIT License. See [`LICENSE`](LICENSE) for details.
