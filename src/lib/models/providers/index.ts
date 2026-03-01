@@ -8,7 +8,6 @@ import GroqProvider from './groq';
 import LemonadeProvider from './lemonade';
 import AnthropicProvider from './anthropic';
 import LMStudioProvider from './lmstudio';
-import AzureOpenAIProvider from './azure';
 export const providers: Record<string, ProviderConstructor<any>> = {
   openai: OpenAIProvider,
   ollama: OllamaProvider,
@@ -18,7 +17,6 @@ export const providers: Record<string, ProviderConstructor<any>> = {
   lemonade: LemonadeProvider,
   anthropic: AnthropicProvider,
   lmstudio: LMStudioProvider,
-  azure: AzureOpenAIProvider,
 };
 
 export const getModelProvidersUIConfigSection =

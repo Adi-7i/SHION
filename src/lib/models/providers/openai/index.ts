@@ -1,5 +1,6 @@
 import { UIConfigField } from '@/lib/config/types';
 import { getConfiguredModelProviderById } from '@/lib/config/serverRegistry';
+import { parseModelList } from '@/lib/server/config/env';
 import { Model, ModelList, ProviderMetadata } from '../../types';
 import OpenAIEmbedding from './openaiEmbedding';
 import BaseEmbedding from '../../base/embedding';
@@ -136,17 +137,18 @@ class OpenAIProvider extends BaseModelProvider<OpenAIConfig> {
   }
 
   async getDefaultModels(): Promise<ModelList> {
-    if (this.config.baseURL === 'https://api.openai.com/v1') {
-      return {
-        embedding: defaultEmbeddingModels,
-        chat: defaultChatModels,
-      };
-    }
+    const envChatKeys = parseModelList(process.env.OPENAI_CHAT_MODELS);
+    const envEmbedKeys = parseModelList(process.env.OPENAI_EMBED_MODELS);
 
-    return {
-      embedding: [],
-      chat: [],
-    };
+    const chatModels: Model[] = envChatKeys.length > 0
+      ? envChatKeys.map((key) => ({ name: key, key }))
+      : (this.config.baseURL === 'https://api.openai.com/v1' ? defaultChatModels : []);
+
+    const embeddingModels: Model[] = envEmbedKeys.length > 0
+      ? envEmbedKeys.map((key) => ({ name: key, key }))
+      : (this.config.baseURL === 'https://api.openai.com/v1' ? defaultEmbeddingModels : []);
+
+    return { chat: chatModels, embedding: embeddingModels };
   }
 
   async getModelList(): Promise<ModelList> {

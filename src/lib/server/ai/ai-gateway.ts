@@ -2,7 +2,6 @@ import { AIModel } from '../config/models';
 import { loadOpenAIChatModel, loadOpenAIEmbeddingModel } from './openai';
 import { loadGeminiChatModel, loadGeminiEmbeddingModel } from './gemini';
 import { loadGroqChatModel } from './groq';
-import { loadAzureChatModel, loadAzureEmbeddingModel } from './azure';
 import BaseLLM from '../../models/base/llm';
 import BaseEmbedding from '../../models/base/embedding';
 
@@ -14,8 +13,6 @@ export const getLLMForModel = async (model: AIModel): Promise<BaseLLM<any>> => {
             return loadGeminiChatModel(model.key);
         case 'groq':
             return loadGroqChatModel(model.key);
-        case 'azure':
-            return loadAzureChatModel(model.key);
         default:
             throw new Error(`Unsupported AI provider: ${model.provider}`);
     }
@@ -27,8 +24,6 @@ export const getEmbeddingForModel = async (model: AIModel): Promise<BaseEmbeddin
             return loadOpenAIEmbeddingModel(model.key);
         case 'gemini':
             return loadGeminiEmbeddingModel(model.key);
-        case 'azure':
-            return loadAzureEmbeddingModel(model.key);
         case 'groq':
             throw new Error('Groq does not support embedding models');
         default:

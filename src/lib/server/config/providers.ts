@@ -1,4 +1,4 @@
-import { getAzureEnv, getEnv } from './env';
+import { getEnv } from './env';
 
 export interface ProviderConfig {
     key: string;
@@ -29,14 +29,6 @@ export const providers: Record<string, ProviderConfig> = {
         isConfigured: () => {
             const env = getEnv();
             return !!env.GROQ_API_KEY;
-        },
-    },
-    azure: {
-        key: 'azure',
-        name: 'Azure OpenAI',
-        isConfigured: () => {
-            const { apiKey, endpoint, deployment } = getAzureEnv();
-            return !!apiKey && !!endpoint && !!deployment;
         },
     },
 };

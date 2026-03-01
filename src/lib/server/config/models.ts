@@ -1,4 +1,4 @@
-import { getAzureEnv } from './env';
+import { getEnv, parseModelList } from './env';
 import { getAvailableProviders } from './providers';
 
 export interface AIModel {
@@ -104,24 +104,27 @@ const staticModels: AIModel[] = [
     },
 ];
 
-// Dynamically build the Azure model from the configured deployment name
-const getAzureModels = (): AIModel[] => {
-    const { deployment } = getAzureEnv();
-    if (!deployment) return [];
-
-    return [
-        {
-            name: deployment, // Show the actual deployment name (e.g. "gpt-4.1")
-            provider: 'azure',
-            type: 'quality',
-            key: deployment,
-        },
-    ];
+// Build the OpenAI chat model list from OPENAI_CHAT_MODELS env var (overrides static list)
+const getEnvOpenAIModels = (): AIModel[] => {
+    const keys = parseModelList(getEnv().OPENAI_CHAT_MODELS);
+    if (keys.length === 0) return [];
+    return keys.map((key) => ({
+        name: key,
+        provider: 'openai',
+        type: 'quality' as const,
+        key,
+    }));
 };
 
 export const getAvailableModels = (): AIModel[] => {
     const configuredProviders = getAvailableProviders().map((p) => p.key);
-    const azureModels = getAzureModels();
-    const allModels = [...staticModels, ...azureModels];
+    const envOpenAIModels = getEnvOpenAIModels();
+
+    // If OPENAI_CHAT_MODELS is set, replace the static openai entries with env-driven ones
+    const baseModels = envOpenAIModels.length > 0
+        ? staticModels.filter((m) => m.provider !== 'openai')
+        : staticModels;
+
+    const allModels = [...baseModels, ...envOpenAIModels];
     return allModels.filter((model) => configuredProviders.includes(model.provider));
 };
