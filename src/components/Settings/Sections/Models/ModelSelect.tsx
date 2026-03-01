@@ -1,14 +1,12 @@
 import Select from '@/components/ui/Select';
-import { ConfigModelProvider } from '@/lib/config/types';
 import { useChat } from '@/lib/hooks/useChat';
+import { useModels } from '@/lib/hooks/useModels';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
 const ModelSelect = ({
-  providers,
   type,
 }: {
-  providers: ConfigModelProvider[];
   type: 'chat' | 'embedding';
 }) => {
   const [selectedModel, setSelectedModel] = useState<string>(
@@ -18,6 +16,7 @@ const ModelSelect = ({
   );
   const [loading, setLoading] = useState(false);
   const { setChatModelProvider, setEmbeddingModelProvider } = useChat();
+  const { models: availableModels, loading: modelsLoading } = useModels();
 
   const handleSave = async (newValue: string) => {
     setLoading(true);
@@ -71,24 +70,14 @@ const ModelSelect = ({
         <Select
           value={selectedModel}
           onChange={(event) => handleSave(event.target.value)}
-          options={
-            type === 'chat'
-              ? providers.flatMap((provider) =>
-                  provider.chatModels.map((model) => ({
-                    value: `${provider.id}/${model.key}`,
-                    label: `${provider.name} - ${model.name}`,
-                  })),
-                )
-              : providers.flatMap((provider) =>
-                  provider.embeddingModels.map((model) => ({
-                    value: `${provider.id}/${model.key}`,
-                    label: `${provider.name} - ${model.name}`,
-                  })),
-                )
-          }
+          options={availableModels
+            .map((model) => ({
+              value: `${model.provider}/${model.key}`,
+              label: `${model.provider} - ${model.name}`,
+            }))}
           className="!text-xs lg:!text-[13px]"
-          loading={loading}
-          disabled={loading}
+          loading={loading || modelsLoading}
+          disabled={loading || modelsLoading}
         />
       </div>
     </section>

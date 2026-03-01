@@ -44,14 +44,6 @@ const sections = [
     component: Models,
     dataAdd: 'modelProviders',
   },
-  {
-    key: 'search',
-    name: 'Search',
-    description: 'Manage search settings.',
-    icon: Search,
-    component: SearchSection,
-    dataAdd: 'search',
-  },
 ];
 
 const SettingsDialogue = ({
