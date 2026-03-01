@@ -25,7 +25,7 @@ const SetupWizard = ({
       setShowSetup(true);
       setSetupState(1);
       await delay(1500);
-      setSetupState(2);
+      setSetupState(3);
     })();
   }, []);
 

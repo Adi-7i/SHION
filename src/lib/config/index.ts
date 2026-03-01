@@ -101,19 +101,7 @@ class ConfigManager {
       },
     ],
     modelProviders: [],
-    search: [
-      {
-        name: 'SearXNG URL',
-        key: 'searxngURL',
-        type: 'string',
-        required: false,
-        description: 'The URL of your SearXNG instance',
-        placeholder: 'http://localhost:4000',
-        default: '',
-        scope: 'server',
-        env: 'SEARXNG_API_URL',
-      },
-    ],
+    search: [],
   };
 
   constructor() {
